@@ -2,11 +2,12 @@
 import React from 'react';
 import Button from "@atlaskit/button";
 import Todo from "./Todo";
-export default function TodoList(){
+export default function TodoList({todoList}){
     return(
     <>
-        <Todo></Todo>
-        <Todo></Todo>
+        {
+            todoList.map(todo => <Todo key={todo.id} todo = {todo} />)
+        }
 
     </>
     )
