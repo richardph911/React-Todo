@@ -1,19 +1,22 @@
 import TodoList from "./components/TodoList";
 import TextField from "@atlaskit/textfield";
 import Button from "@atlaskit/button";
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import {v4} from "uuid";
 function App() {
 
   const [todoList, setTodoList] = useState([]);
   const [textInput, setTextInput] = useState("");
-  const onTextInputChange = (e) =>{
-      setTextInput(e.target.value); //set use input
-  };
-  const onAddButton = (e) =>{
-      setTodoList([...todoList, {id: v4(), name: textInput, isCompleted: false},]);
 
-  };
+  const onTextInputChange = useCallback ((e) =>{
+      setTextInput(e.target.value); //set use input
+  }, []);
+
+  const onAddButton = useCallback((e) =>{
+      setTodoList([...todoList, {id: v4(), name: textInput, isCompleted: false},]);
+      setTextInput("");
+
+  }, [todoList, textInput]);
   return (
       <div>
         <h3>Lists:</h3>
